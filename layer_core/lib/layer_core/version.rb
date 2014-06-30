@@ -1,0 +1,3 @@
+module LayerCore
+  VERSION = "0.0.1"
+end

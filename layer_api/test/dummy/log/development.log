@@ -1,0 +1,36 @@
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to EnableExtensions (20140628203243)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (4.6ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "uuid-ossp"[0m
+  [1m[35mSQL (18.5ms)[0m  CREATE EXTENSION IF NOT EXISTS "hstore"
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140628203243"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+Migrating to CreateUsers (20140628203244)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.8ms)[0m  CREATE TABLE "users" ("id" uuid PRIMARY KEY  DEFAULT uuid_generate_v4(), "identifier" character varying(255), "properties" hstore, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140628203244"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreateItems (20140628203245)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.2ms)[0m  CREATE TABLE "items" ("id" uuid PRIMARY KEY  DEFAULT uuid_generate_v4(), "name" character varying(255), "properties" hstore, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140628203245"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+Migrating to CreateEvents (20140628203246)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "events" ("id" uuid PRIMARY KEY  DEFAULT uuid_generate_v4(), "user_id" uuid, "item_id" uuid, "event" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140628203246"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to AddIdentifierToItem (20140628203247)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "items" ADD COLUMN "identifier" character varying(255)
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140628203247"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to AddIndexesToUserAndItem (20140628203248)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_items_on_identifier" ON "items"  ("identifier")
+  [1m[36m (0.7ms)[0m  [1mCREATE  INDEX  "index_users_on_identifier" ON "users"  ("identifier")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140628203248"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
