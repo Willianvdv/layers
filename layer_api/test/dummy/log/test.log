@@ -7721,3 +7721,249 @@ Unpermitted parameters: x
   [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
 Completed 400 Bad Request in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms)
   [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------------------------------------------------------------------
+LayerApi::EventsControllerTest::EventCreationTest::EventIsCreated: test_create_a_event_with_user_and_item
+---------------------------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (3.2ms)[0m  INSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.639823"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.639823"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.654136"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.654136"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::EventsController#create as JSON
+  Parameters: {"event"=>{"user_identifier"=>"user@example.com", "item_identifier"=>"sku123", "event"=>"view"}}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."identifier" = 'user@example.com'  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mItem Load (0.2ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."identifier" = 'sku123'  ORDER BY "items"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "item_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.675070"], ["event", "view"], ["item_id", "8853392c-3893-4599-b72f-4427399a7d1b"], ["updated_at", "2014-06-30 14:52:00.675070"], ["user_id", "25f8b129-1c43-425f-859f-7f6b222cde82"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 24ms (Views: 5.1ms | ActiveRecord: 2.4ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------------------------------------------------------------------------------
+LayerApi::EventsControllerTest::EventCreationTest::EventIsCreated: test_the_item_is_unknown_so_it_will_be_created
+-----------------------------------------------------------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.684880"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.684880"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mItem Exists (0.2ms)[0m  SELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.687126"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.687126"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by LayerApi::EventsController#create as JSON
+  Parameters: {"event"=>{"user_identifier"=>"user@example.com", "item_identifier"=>"UNKNOWN_ITEM_ID", "event"=>"view"}}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."identifier" = 'user@example.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mItem Load (0.2ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."identifier" = 'UNKNOWN_ITEM_ID'  ORDER BY "items"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mItem Exists (0.2ms)[0m  SELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'UNKNOWN_ITEM_ID' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("created_at", "identifier", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.692253"], ["identifier", "UNKNOWN_ITEM_ID"], ["updated_at", "2014-06-30 14:52:00.692253"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events" ("created_at", "event", "item_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.693868"], ["event", "view"], ["item_id", "085f550e-f692-4b27-b92e-3c63c5aa8c89"], ["updated_at", "2014-06-30 14:52:00.693868"], ["user_id", "34e8b975-94bf-49c4-8879-4ddde16f24f4"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 6ms (Views: 0.8ms | ActiveRecord: 1.2ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+-----------------------------------------------------------------------------------------------------------------
+LayerApi::EventsControllerTest::EventCreationTest::EventIsCreated: test_the_user_is_unknown_so_it_will_be_created
+-----------------------------------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.698177"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.698177"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.700244"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.700244"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::EventsController#create as JSON
+  Parameters: {"event"=>{"user_identifier"=>"UNKNOWN_USER_ID", "item_identifier"=>"sku123", "event"=>"view"}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."identifier" = 'UNKNOWN_USER_ID'  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'UNKNOWN_USER_ID' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.704643"], ["identifier", "UNKNOWN_USER_ID"], ["updated_at", "2014-06-30 14:52:00.704643"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mItem Load (0.2ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."identifier" = 'sku123'  ORDER BY "items"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "item_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.706944"], ["event", "view"], ["item_id", "b449dc8b-2bcb-4e73-a66f-ba3544f8b474"], ["updated_at", "2014-06-30 14:52:00.706944"], ["user_id", "b51ff070-255e-43d2-ac81-7291140d005a"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 1.3ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------
+LayerApiTest: test_truth
+------------------------
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------------------------------------
+LayerApi::EventsControllerTest::EventIndexTest: test_index_returns_all_the_events
+---------------------------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.714373"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.714373"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mItem Exists (0.2ms)[0m  SELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.716535"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.716535"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by LayerApi::EventsController#index as JSON
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------------------------------------------------------------------------------
+LayerApi::EventsControllerTest::EventCreationTest::EventIsNotCreated: test_create_a_event_without_attributes_fails
+------------------------------------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.724191"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.724191"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (3.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.726314"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.726314"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::EventsController#create as JSON
+  Parameters: {"event"=>{"x"=>:y}}
+Unpermitted parameters: x
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 400 Bad Request in 6ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+-----------------------------------------------------------
+LayerApi::ItemsControllerTest: test_create_a_item_with_name
+-----------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.742384"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.742384"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::ItemsController#create as JSON
+  Parameters: {"item"=>{"identifier"=>"sku_123", "name"=>"item 1", "properties"=>{"color"=>"red"}}}
+Unpermitted parameters: properties
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku_123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.747230"], ["identifier", "sku_123"], ["name", "item 1"], ["properties", "\"color\"=>\"red\""], ["updated_at", "2014-06-30 14:52:00.747230"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+-----------------------------------------------------------------
+LayerApi::ItemsControllerTest: test_create_a_item_with_properties
+-----------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.751047"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.751047"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::ItemsController#create as JSON
+  Parameters: {"item"=>{"identifier"=>"sku_123", "name"=>"item 1", "properties"=>{"color"=>"red"}}}
+Unpermitted parameters: properties
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku_123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.755039"], ["identifier", "sku_123"], ["name", "item 1"], ["properties", "\"color\"=>\"red\""], ["updated_at", "2014-06-30 14:52:00.755039"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------------
+LayerApi::ItemsControllerTest: test_update_an_item
+--------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "items"  WHERE "items"."identifier" = 'sku123' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "identifier", "name", "properties", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.759258"], ["identifier", "sku123"], ["name", "item name"], ["properties", "\"color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.759258"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::ItemsController#update as JSON
+  Parameters: {"id"=>"3bd8adc6-0494-4284-aea0-bf62e5b8dcf8", "item"=>{"name"=>"item 2"}}
+  [1m[35mItem Load (0.2ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = $1 LIMIT 1  [["id", "3bd8adc6-0494-4284-aea0-bf62e5b8dcf8"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mItem Exists (0.2ms)[0m  SELECT  1 AS one FROM "items"  WHERE ("items"."identifier" = 'sku123' AND "items"."id" != '3bd8adc6-0494-4284-aea0-bf62e5b8dcf8') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "items" SET "name" = $1, "properties" = $2, "updated_at" = $3 WHERE "items"."id" = '3bd8adc6-0494-4284-aea0-bf62e5b8dcf8'[0m  [["name", "item 2"], ["properties", nil], ["updated_at", "2014-06-30 14:52:00.764055"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.8ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+-----------------------------------------------------------------
+LayerApi::UsersControllerTest: test_create_a_user_with_identifier
+-----------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.770500"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.770500"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by LayerApi::UsersController#create as JSON
+  Parameters: {"user"=>{"identifier"=>"test@example.com", "properties"=>{"favorite_color"=>"red"}}}
+Unpermitted parameters: properties
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'test@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.775349"], ["identifier", "test@example.com"], ["properties", "\"favorite_color\"=>\"red\""], ["updated_at", "2014-06-30 14:52:00.775349"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.6ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------------------------------
+LayerApi::UsersControllerTest: test_create_a_user_with_properties
+-----------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.779347"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.779347"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by LayerApi::UsersController#create as JSON
+  Parameters: {"user"=>{"identifier"=>"test@example.com", "properties"=>{"favorite_color"=>"red"}}}
+Unpermitted parameters: properties
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'test@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.784281"], ["identifier", "test@example.com"], ["properties", "\"favorite_color\"=>\"red\""], ["updated_at", "2014-06-30 14:52:00.784281"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.7ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+--------------------------------------------------------------------
+LayerApi::UsersControllerTest: test_create_a_user_without_identifier
+--------------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-06-30 14:52:00.788584"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.788584"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by LayerApi::UsersController#create as JSON
+  Parameters: {"user"=>{"identifier"=>nil}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."identifier" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 400 Bad Request in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------------------------------
+LayerApi::UsersControllerTest: test_update_a_user_without_identifier
+--------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.796276"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.796276"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::UsersController#update as JSON
+  Parameters: {"id"=>"17f36b2a-2770-4472-813d-9c1b3eeebf33", "user"=>{"identifier"=>nil}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", "17f36b2a-2770-4472-813d-9c1b3eeebf33"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE ("users"."identifier" IS NULL AND "users"."id" != '17f36b2a-2770-4472-813d-9c1b3eeebf33') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 400 Bad Request in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------------
+LayerApi::UsersControllerTest: test_update_an_user
+--------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."identifier" = 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "identifier", "properties", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-06-30 14:52:00.804396"], ["identifier", "user@example.com"], ["properties", "\"favorite_color\"=>\"blue\""], ["updated_at", "2014-06-30 14:52:00.804396"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by LayerApi::UsersController#update as JSON
+  Parameters: {"id"=>"a89a93d3-af5c-4ef3-b93d-4f2923a47d22", "user"=>{"identifier"=>"user@example.com"}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", "a89a93d3-af5c-4ef3-b93d-4f2923a47d22"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users"  WHERE ("users"."identifier" = 'user@example.com' AND "users"."id" != 'a89a93d3-af5c-4ef3-b93d-4f2923a47d22') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "properties" = $1, "updated_at" = $2 WHERE "users"."id" = 'a89a93d3-af5c-4ef3-b93d-4f2923a47d22'[0m  [["properties", nil], ["updated_at", "2014-06-30 14:52:00.809018"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.8ms)
+  [1m[36m (0.5ms)[0m  [1mROLLBACK[0m
