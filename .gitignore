@@ -8,3 +8,5 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 
 layer_demo/config/application.yml
+
+*.log
