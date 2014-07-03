@@ -37,6 +37,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'pg'
+gem 'figaro'
 
 gem 'layer_core', path: '../layer_core'
 gem 'layer_api', path: '../layer_api'

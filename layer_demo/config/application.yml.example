@@ -1,0 +1,7 @@
+SECRET_TOKEN: 'XXXXXXXXXXX'
+
+development:
+  api_keys: "POWERKEY,ABCDE,"
+
+test:
+  api_keys: "POWERKEY,ABCDE,"
