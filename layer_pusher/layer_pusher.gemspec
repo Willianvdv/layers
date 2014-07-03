@@ -7,17 +7,17 @@ require "layer_pusher/version"
 Gem::Specification.new do |s|
   s.name        = "layer_pusher"
   s.version     = LayerPusher::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of LayerPusher."
-  s.description = "TODO: Description of LayerPusher."
+  s.authors     = ["Willian van der Velde"]
+  s.email       = ["mail@willian.io"]
+  s.homepage    = "http://www.willian.io"
+  s.summary     = "Push data to pusher"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.1.2"
+  s.add_dependency 'pusher'
 
-  s.add_development_dependency "pg"
+  s.add_development_dependency 'pg'
 end
