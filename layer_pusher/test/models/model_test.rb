@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
@@ -6,7 +7,8 @@ class EventTest < ActiveSupport::TestCase
     @event = FactoryGirl.build :event
   end
 
-  test 'event is valid' do
-    assert @event.valid?
+  test 'after creation pusher will be notified' do
+    Pusher.expects(:trigger)
+    @event.save!
   end
 end

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-# Declare your gem's dependencies in layer_core.gemspec.
+# Declare your gem's dependencies in layer_pusher.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
@@ -12,6 +12,8 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+
+gem 'layer_core', path: '../layer_core'
 
 group :development, :test do
   gem 'factory_girl'
