@@ -6,6 +6,10 @@ require "rails/test_help"
 
 Rails.backtrace_cleaner.remove_silencers!
 
+require 'layer_core/factories/user'
+require 'layer_core/factories/item'
+require 'layer_core/factories/event'
+
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
