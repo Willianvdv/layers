@@ -12,3 +12,11 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+
+gem 'layer_core', path: '../layer_core'
+
+group :development, :test do
+  gem 'factory_girl'
+  gem 'rubocop'
+  gem 'mocha'
+end

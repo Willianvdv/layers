@@ -11,6 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140704141915) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+  enable_extension "hstore"
+
+  create_table "events", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.uuid     "user_id"
+    t.uuid     "item_id"
+    t.string   "event"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "predictionio_synced_at"
+  end
+
+  create_table "items", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "name"
+    t.hstore   "properties"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "identifier"
+    t.datetime "predictionio_synced_at"
+  end
+
+  add_index "items", ["identifier"], name: "index_items_on_identifier", using: :btree
+
+  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "identifier"
+    t.hstore   "properties"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "predictionio_synced_at"
+  end
+
+  add_index "users", ["identifier"], name: "index_users_on_identifier", using: :btree
 
 end
