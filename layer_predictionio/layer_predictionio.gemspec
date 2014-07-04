@@ -7,11 +7,10 @@ require "layer_predictionio/version"
 Gem::Specification.new do |s|
   s.name        = "layer_predictionio"
   s.version     = LayerPredictionio::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of LayerPredictionio."
-  s.description = "TODO: Description of LayerPredictionio."
+  s.authors     = ["Willian van der Velde"]
+  s.email       = ["mail@willian.io"]
+  s.homepage    = "willian.io"
+  s.summary     = "Adds data to predictionio"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
