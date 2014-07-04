@@ -1,5 +1,9 @@
-require 'concerns/predictionio_syncable'
+require 'concerns/predictionio'
 
 Item.class_eval do
-  include PredictionioSyncable
+  include Predictionio
+
+  def sync_with_predictionio
+
+  end
 end
