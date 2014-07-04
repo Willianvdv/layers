@@ -9,7 +9,7 @@ module Predictionio
     !predictionio_synced_at.nil?
   end
 
-  def predicitionio_client
+  def predictionio_client
 
   end
 end

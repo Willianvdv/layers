@@ -7,9 +7,13 @@ class EventTest < ActiveSupport::TestCase
     @event = FactoryGirl.create :event
     @predictionio_client = mock()
     @predictionio_client.stubs(:identify)
+
     @predictionio_client.stubs(:record_action_on_item)
 
-    @event.stubs(:predicitionio_client).returns(@predictionio_client)
+    @event.user.stubs(:sync_with_predictionio)
+    @event.item.stubs(:sync_with_predictionio)
+
+    @event.stubs(:predictionio_client).returns(@predictionio_client)
   end
 
   test '.not_synced_with_predictionio will return all unsynced events' do
