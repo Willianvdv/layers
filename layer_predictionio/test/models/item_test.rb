@@ -19,7 +19,6 @@ class ItemTest < ActiveSupport::TestCase
     @item.sync_with_predictionio
   end
 
-
   test '.synced_with_predictionio? should be false if unsynced' do
     refute @item.synced_with_predictionio?
   end
