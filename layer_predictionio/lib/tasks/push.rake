@@ -12,3 +12,4 @@ namespace :predictionio do
       progress_bar.increment
     end
   end
+end
