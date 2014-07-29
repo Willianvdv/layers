@@ -1,4 +1,6 @@
 require 'layer_core/engine'
+require 'predictionio'
+
 
 module LayerPredictionio
   class Engine < ::Rails::Engine
