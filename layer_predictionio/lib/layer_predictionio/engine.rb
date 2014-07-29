@@ -1,3 +1,4 @@
+require 'progressbar'
 require 'layer_core/engine'
 
 module LayerPredictionio

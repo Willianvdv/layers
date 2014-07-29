@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.1.4"
 
   s.add_dependency 'predictionio'
-
+  s.add_dependency 'ruby-progressbar'
   s.add_development_dependency "pg"
 end

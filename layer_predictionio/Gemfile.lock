@@ -4,6 +4,7 @@ PATH
     layer_predictionio (0.0.1)
       predictionio
       rails (~> 4.1.4)
+      ruby-progressbar
 
 PATH
   remote: ../layer_core
