@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = LayerPredictionio::VERSION
   s.authors     = ["Willian van der Velde"]
   s.email       = ["mail@willian.io"]
-  s.homepage    = "willian.io"
+  s.homepage    = "http://www.willian.io"
   s.summary     = "Adds data to predictionio"
   s.license     = "MIT"
 

@@ -7,11 +7,10 @@ require "layer_api/version"
 Gem::Specification.new do |s|
   s.name        = "layer_api"
   s.version     = LayerApi::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of LayerApi."
-  s.description = "TODO: Description of LayerApi."
+  s.authors     = ['Willian van der Velde']
+  s.email       = ['mail@willian.io']
+  s.homepage    = 'http://www.willian.io'
+  s.summary     = 'Provides a api for layer'
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

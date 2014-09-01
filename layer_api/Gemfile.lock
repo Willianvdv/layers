@@ -1,16 +1,16 @@
 PATH
+  remote: ../layer_core
+  specs:
+    layer_core (0.0.1)
+      rails (~> 4.1.0)
+
+PATH
   remote: .
   specs:
     layer_api (0.0.1)
       active_model_serializers
       rails (~> 4.1.2)
       rails-api
-
-PATH
-  remote: ../layer_core
-  specs:
-    layer_core (0.0.1)
-      rails (~> 4.1.0)
 
 GEM
   remote: https://rubygems.org/
