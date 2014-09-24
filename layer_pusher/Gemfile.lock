@@ -1,15 +1,15 @@
 PATH
-  remote: ../layer_core
-  specs:
-    layer_core (0.0.1)
-      rails (~> 4.1.0)
-
-PATH
   remote: .
   specs:
     layer_pusher (0.0.1)
       pusher
       rails (~> 4.1.2)
+
+PATH
+  remote: ../layer_core
+  specs:
+    layer_core (0.0.1)
+      rails (~> 4.1.0)
 
 GEM
   remote: https://rubygems.org/
