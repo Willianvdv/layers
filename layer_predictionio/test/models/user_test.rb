@@ -19,7 +19,6 @@ class UserTest < ActiveSupport::TestCase
     @user.sync_with_predictionio
   end
 
-
   test '.synced_with_predictionio? should be false if unsynced' do
     refute @user.synced_with_predictionio?
   end
